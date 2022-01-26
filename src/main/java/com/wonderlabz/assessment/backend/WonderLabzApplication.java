@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WonderlabzApplication {
+public class WonderLabzApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WonderlabzApplication.class, args);
+		SpringApplication.run(WonderLabzApplication.class, args);
 	}
 
 }
