@@ -6,16 +6,20 @@ import com.wonderlabz.assessment.backend.repository.ConversionRepository;
 import com.wonderlabz.assessment.backend.service.ConversionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ConversionServiceImpl implements ConversionService {
-
+    @Autowired
     private final ConversionRepository repository;
 
     @Override
@@ -93,5 +97,11 @@ public class ConversionServiceImpl implements ConversionService {
                 .build();
         repository.saveAndFlush(conversion);
         return response;
+    }
+
+    @Override
+    public List<Conversion> getAllConversions() {
+        log.info("Finding all conversions from the database");
+        return repository.findAll();
     }
 }

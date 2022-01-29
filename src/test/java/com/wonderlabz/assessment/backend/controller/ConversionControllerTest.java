@@ -43,11 +43,19 @@ class ConversionControllerTest {
                 .result(BigDecimal.valueOf(20.20))
                 .build();
     }
+    @Test
+    void conversions() throws Exception {
+        when(conversionService.convertingKelvinToCelsius(any(Double.class))).thenReturn(response);
+        mockMvc.perform(get("/conversions"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"));
+    }
 
     @Test
     void convertingKelvinToCelsius() throws Exception {
         when(conversionService.convertingKelvinToCelsius(any(Double.class))).thenReturn(response);
-        mockMvc.perform(get("/conversions/ktoc/280"))
+        mockMvc.perform(get("/conversions/ktoc?kelvin=280"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"));
@@ -56,7 +64,7 @@ class ConversionControllerTest {
     @Test
     void convertingCelsiusToKevin() throws Exception {
         when(conversionService.convertingCelsiusToKevin(any(Double.class))).thenReturn(response);
-        mockMvc.perform(get("/conversions/ctok/6.85"))
+        mockMvc.perform(get("/conversions/ctok?celsius=6.85"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"));
@@ -65,7 +73,7 @@ class ConversionControllerTest {
     @Test
     void convertingMilesToKilometres() throws Exception {
         when(conversionService.convertingMilesToKilometres(any(Double.class))).thenReturn(response);
-        mockMvc.perform(get("/conversions/mtok/6.00"))
+        mockMvc.perform(get("/conversions/mtok?miles=6.00"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"));
@@ -74,7 +82,7 @@ class ConversionControllerTest {
     @Test
     void convertingKilometersToMiles() throws Exception {
         when(conversionService.convertingKilometersToMiles(any(Double.class))).thenReturn(response);
-        mockMvc.perform(get("/conversions/ktom/9.65"))
+        mockMvc.perform(get("/conversions/ktom?kilometers=9.65"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"));

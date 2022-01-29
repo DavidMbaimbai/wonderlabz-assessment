@@ -31,6 +31,12 @@ class ConversionServiceImplTest {
     }
 
     @Test
+    void conversions() {
+        var conversions =conversionService.getAllConversions();
+        assertNotNull(conversions);
+    }
+
+    @Test
     void convertingKelvinToCelsius() {
         Response response = conversionService.convertingKelvinToCelsius(280);
         assertEquals(6.85, response.getResult().doubleValue());
